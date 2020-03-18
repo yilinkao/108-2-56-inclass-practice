@@ -8,6 +8,11 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+```{r}
+library(googlesheets4)
+library(dplyr)
+library(lubridate)
+```
 
 ## R Markdown
 
@@ -28,3 +33,25 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## create object
+```{r}
+a <- 2
+a = 2 # = 與 <-同義
+```
+
+```{r}
+3 -> b
+```
+
+```{r}
+b
+a
+```
+
+## 雙井字號做大綱
+(右上角可以找到)
+
+```{r 小標題}
+
+```
