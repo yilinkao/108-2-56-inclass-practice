@@ -1,0 +1,124 @@
+---
+title: "0409"
+author: "高以琳"
+date: "2020/4/10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 0409
+```{r}
+vectorExample <- c("小明","小英","大雄")
+
+# 有多少位置可選：
+length(vectorExample) #小名小瑛大雄
+```
+```{r}
+vectorExample[[1]]
+vectorExample[[3]]
+vectorExample[[2]]
+```
+
+
+```{r}
+listExample <- 
+  list(
+    student="小明",
+    `學期`=list(
+      `108-1`=list(
+        list(
+          name="個體經濟學",
+          teacher="Alice",
+          grade=85
+        )
+      ),
+      `108-2`=list(
+        list(
+          name="總體經濟學",
+          teacher="Mark",
+          grade=78
+        )
+      )
+    )
+  )
+# 有多少位置可選： (指的是lsit第一層元素的個數)
+length(listExample) #答案為2 1.student 2.學期
+```
+```{r}
+listExample[[1]]
+listExample[[2]]
+```
+
+```{r}
+library(jsonlite)
+fromJSON("https://data.tainan.gov.tw/dataset/4cd9345a-04bf-4328-a97d-314ff78b4763/resource/afc025fc-1ef4-447c-b785-a680391d0ca1/download/tnsport2.json", simplifyDataFrame = F) -> tainanSportsMap
+
+length(tainanSportsMap)
+```
+```{r}
+tainanSportsMap[[1]] #[[1]]是個有24個元素的list
+tainanSportsMap[[2]]
+tainanSportsMap[[10]]
+```
+
+## 用名字選要用$.
+```{r}
+listExample$student #因為是物件名稱，所以不需要加雙引號
+```
+```{r}
+listExample$`學期` # 特殊命名依然要用反頓點呼叫
+```
+
+
+```{r}
+str(listExample)
+```
+```{r 用$}
+str(listExample$student)
+str(listExample$'學期')
+```
+
+
+```{r 用雙引號} 
+#也可以用[["名字"]]來選，只是名字要以字串「值」的方式來寫，也就是要用引號一對"…"
+listExample[["student"]]
+listExample$student
+
+listExample[["學期"]] # 小心不是反頓點喔。
+listExample$`學期`
+```
+
+```{r}
+student<-"student"
+listExample[[student]]
+#會顯示error:object not found，
+#因為沒加雙引號時，會以為你在找「物件」
+#創造物件student，他的值就等於"student"
+```
+
+
+```{r}
+fromJSON("http://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000157-002",
+         simplifyDataFrame = F) -> newTaipeiCityVaccine
+```
+```{r}
+str(newTaipeiCityVaccine)
+length(newTaipeiCityVaccine)
+names(newTaipeiCityVaccine)
+```
+# "success"是[[1]] / "result"是[[2]]
+```{r}
+str(newTaipeiCityVaccine[[1]])
+str(newTaipeiCityVaccine$success)
+str(newTaipeiCityVaccine[["success"]])
+#以上結果皆相同
+str(newTaipeiCityVaccine[[2]],max.level = 1) #max.level=1表示只顯示一層
+str(newTaipeiCityVaccine$result,max.level = 1)
+str(newTaipeiCityVaccine[["result"]])
+#以上結果皆相同
+```
+
+##上到26:33

@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1586276522227.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "DBBCA9AF",
+    "lastKnownWriteTime" : 2303793003480,
+    "last_content_update" : 1586276522227,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "id" : "d8f12bdd2d064f32823074700c89c9fe",
+        "name" : "weather_next36hours",
+        "title" : "weather_next36hours"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "object_explorer"
+}

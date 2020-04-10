@@ -171,20 +171,36 @@ print(`小明108學年課表B`)
 ```{r}
 # list含兩個lists, 子層list又各含兩個vectors
 `小明108學年課表C` <- list(
-  `108學年第1學期`=list(
+  list(
     c("108-1"), # 可只寫 "108-1"
     c("高級會計學","高等統計學")
        ),
-  `108學年第2學期`=list(
+  list(
     c("108-2"),
     c("食在拉丁美洲")
   )
 )
 print(`小明108學年課表C`)
 ```
+```{r}
+`小明108學年課表D` <- list(
+  `上學期`=list(
+    semester=c("108-1"), 
+    courses=c("高級會計學","高等統計學")
+       ),
+  `下學期`=list(
+    semester=c("108-2"),
+    c("食在拉丁美洲")
+  )
+)
+print(`小明108學年課表D`)
+#取名稱時=把它想成<-，名稱在<-左邊，所以物件名稱規定也同樣適用在這裡取名上。
+#注意：若名稱不符規定要用「反頓點`」一對括起來，千萬不要用一對單引號'，或一對雙引號"…那就遜了。
+```
+
 
 ```{r}
-`小明108學年課表practice` <- list(
+`小明108學年課表p`<- list(
     list(
     c("108-1"), # 可只寫 "108-1"
     c("高級會計學","高等統計學")
@@ -198,6 +214,40 @@ print(`小明108學年課表C`)
     c("體育")
   )
 )
-print(`小明108學年課表practice`)
+print(`小明108學年課表p`)
+```
+##Githib commit
+```{r}
+commit <- list(
+ author1=c("Martin老師","mtlin@gm.ntpu.edu.tw", 
+            "2020-03-25T07:17:40Z"), #不好，因為三個會在同一群
+ author2=list(
+    name="Martin老", 
+    email="mtlin@gm.ntpu.edu.tw", 
+    time=("2020-03-25T07:17:40Z")
+  ),
+  committer=list(
+    name="emilyluckey", 
+    email="emily007@gmail.com", 
+    time="2020-03-26T08:18:40Z"
+  ), 
+  message=c("update") #也可以寫="update"
+)
+print(commit)
+```
+```{r}
+library(jsonlite)
+toJSON(commit)
+```
+##0401 practice
+```{r}
+#今（“2020-03-31”）明（“2020-04-01”）「台北市」氣溫最高25度，最低18度；「新北市」氣溫最高24度，最低15度。
+library(jsonlite)
+fromJSON("https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=rdec-key-123-45678-011121314&format=JSON") ->
+  weather_next36hours
+```
+
+```{r}
+save(commit,`小明108學年課表C`)
 ```
 

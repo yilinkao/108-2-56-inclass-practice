@@ -1,0 +1,27 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1586504938913.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4258507172",
+    "id" : "1D07A825",
+    "lastKnownWriteTime" : 1586506598,
+    "last_content_update" : 1586506598729,
+    "path" : "~/GitHub/108-2-56-inclass-practice/HW1/作業1.Rmd",
+    "project_path" : "作業1.Rmd",
+    "properties" : {
+        "cursorPosition" : "25,14",
+        "last_setup_crc32" : "B6E224F36e85358a",
+        "scrollLine" : "3",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
