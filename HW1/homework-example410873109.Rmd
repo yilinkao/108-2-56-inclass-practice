@@ -1,5 +1,5 @@
 ---
-title: "homework 1"
+title: "homework-example"
 output: html_document
 params:
   studentName: "高以琳"
@@ -41,7 +41,7 @@ library(lubridate); library(jsonlite); library(readr)
 "Error in library(lubridate) : there is no package called ‘lubridate’"
 
 ```{r ans21c}
-
+install.packages(c('lubridate'))
 ```
 
 ### 2.2
@@ -54,14 +54,34 @@ oslo_time <- "18.11.2018 15:33:02"
 其中taiwan_time為台灣時間，oslo_time為挪威Oslo時間。請將兩個時間存在一個atomic vector叫two_times的物件裡，且為Date/Time class（即POSIXct POSIXt class）。
 
 ```{r ans22}
-# two_times
+two_times<-
+  list(
+   taiwan_time=c(
+     'Date/Time'=ymd_hms("西元2019年4月12日 12點55分30秒")
+   ),
+   oslo_time=c(
+     'Date/Time'=ymd_hms("18.11.2018 15:33:02")
+   )
+  )
+str(two_times)
 ```
+
 
 ### 2.3
 將two_times改成美國Chicago時間顯示的two_times_chicago：
 
 ```{r ans23}
-# two_times_chicago
+two_times_chicago<-
+  list(
+   taiwan_time=c(
+     'Date/Time'=ymd_hms("西元2019年4月12日 12點55分30秒",
+                         tz="America/Chicago")
+   ),
+   oslo_time=c(
+     'Date/Time'=ymd_hms("18.11.2018 15:33:02",
+                         tz="America/Chicago")
+   )
+  )
 ```
 
 ## 3 List
@@ -84,9 +104,25 @@ List of 2
 
 其中approve（核準狀況，logics class），course_info(課程資訊), coursename(課名), type（類別，必/選/通）, credits（學分數, numeric class）, time_place（上課時地）, weekday（星期）, time_slots（節次, numeric class）, classroom（教室）的意思如（）內容所示。
 
+
 ```{r ans31}
-# course
+course<-list(
+  approve<-T,
+  course_info=list(
+    coursename="會計學",
+    type="必",
+    credits=3,
+    time_place=list(
+      list(
+        weekday="星期三",
+        time_slots=num<-c(7,8,9),
+        classroom<-"商205")
+   )
+  )
+ )
+str(course)
 ```
+
 
 ### 3.2
 依上題架構，若該課的上課時間分兩個時間，地點不變：
@@ -97,7 +133,25 @@ List of 2
 你要怎麼修改你的course物件內容讓裡頭的time_slots可以有兩個時段及地點，答案物件為courseUpdate。courseUpdate內容只有time_place與course不同，其餘元素值維持與course相同內容。
 
 ```{r ans32}
-# courseUpdate
+courseUpdate<-list(
+  approve<-T,
+  course_info=list(
+    coursename="會計學",
+    type="必",
+    credits=3,
+    time_place=list(
+      list(
+        weekday="星期三",
+        time_slots=num<-c(7,8),
+        classroom<-"商205"),
+      list(
+        weekday="、星期二",
+        time_slots=num<-c(5),
+        classroom<-"商205")
+   )
+  )
+ )
+str(courseUpdate)
 ```
 
 ### 3.3
@@ -124,8 +178,28 @@ List of 2
 此list資訊自行目測找出正確資訊手動輸入即可，此題考驗同學是否有讀懂此平台資料說明的能力。
 
 可用str(accidents)來檢查你的答案是否有符合格式。
+```{r}
+fromJSON("https://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000328-002",simplifyDataFrame = F)->accidents
+print(accidents)
+length(accidents)
+str(accidents$result$fields)
+#str(accidents)
+```
+
 ```{r ans33}
-# accidents
+accidents<-list(
+  time=ymd_hms(
+  c("2014/01/01")),
+  bureaus=list(
+    `板橋分局`=list(
+    type=c("field1=0,field2=0,field3=0,field4=0,field5=0,field6=0,field7=0,field8=0,field9=0,field10=0,field11=0,field12=0,field13=1,field14=0,field15=0,field16=0,other=0"),
+    casualties=1),
+    `海山分局`=list(
+      type=c("field1=0,field2=0,field3=0,field4=0,field5=0,field6=0,field7=0,field8=0,field9=0,field10=0,field11=0,field12=1,field13=0,field14=0,field15=0,field16=0,other=0"),
+      casualties=1)
+)
+)
+str(accidents)
 ```
 
 
@@ -137,27 +211,45 @@ List of 2
 source("https://www.dropbox.com/s/bvs0m4oxw7yaqxw/108-2-hw1-3.R?dl=1")
 fiveReceipts <- .randomReceipts(n=5)
 ```
+.randomReceipts <- function(n=200){
+  factor(
+    c(sample(1:10, n-3, replace=T),1,1,1),
+    levels=c(5,3,2,1,4,6,7,8,9,10)
+  )
+}
+
+.randomFiveReceipts <- function(){
+  factor(
+    c(sample(1:5, 3, replace=T),1,1),
+    levels=c(5,3,2,1,4)
+  ) -> fiveReceipts
+  return(fiveReceipts)
+}
 
 ### 4.1
 用levels()函數來顯示fiveReceipts有那幾個levels，並把回傳的結果值存在levels_fiveReceipts. 
 
 ```{r ans41}
-# levels_fiveReceipts
+levels(fiveReceipts)
+levels_fiveReceipts<-c(5,3,2,1,4,6,7,8,9,10)
 ```
 ### 4.2
 使用as.integer()函數來顯示fiveReceipts在電腦的存法，並把回傳的結果值存在storage_fiveReceipts. 
 ```{r ans42}
-# storage_fiveReceipts
+as.integer(fiveReceipts)
+ storage_fiveReceipts<-c(8,8,4,4,4)
 ```
 
 ### 4.3
 使用as.character()函數將fiveReceipts在螢幕顯示的表面值改成字串，並把回傳的結果值存在chr_fiveReceipts.
 ```{r ans43}
-# chr_fiveReceipts
+as.character(fiveReceipts)
+ chr_fiveReceipts<-c(8,8,1,1,1)
 ```
 ### 4.4
 若我們想要把fiveReceipts的螢幕顯示值用sum()函數加總，在只使用as.{class name}函數下，要怎麼做？把sum完的結果存在sum_fiveReceipts。
 ```{r ans44}
+as.{fiveReceipts}
 # sum_fiveReceipts
 ```
 

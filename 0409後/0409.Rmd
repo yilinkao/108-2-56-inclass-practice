@@ -46,6 +46,7 @@ listExample <-
   )
 # 有多少位置可選： (指的是lsit第一層元素的個數)
 length(listExample) #答案為2 1.student 2.學期
+str(listExample)
 ```
 ```{r}
 listExample[[1]]
@@ -87,7 +88,7 @@ str(listExample$'學期')
 listExample[["student"]]
 listExample$student
 
-listExample[["學期"]] # 小心不是反頓點喔。
+listExample[["學期"]] # 小心不是反頓點喔
 listExample$`學期`
 ```
 
@@ -105,20 +106,68 @@ fromJSON("http://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000157-002",
          simplifyDataFrame = F) -> newTaipeiCityVaccine
 ```
 ```{r}
-str(newTaipeiCityVaccine)
+#str(newTaipeiCityVaccine)
 length(newTaipeiCityVaccine)
 names(newTaipeiCityVaccine)
 ```
-# "success"是[[1]] / "result"是[[2]]
+#"success"是[[1]] / "result"是[[2]]
 ```{r}
 str(newTaipeiCityVaccine[[1]])
 str(newTaipeiCityVaccine$success)
 str(newTaipeiCityVaccine[["success"]])
 #以上結果皆相同
-str(newTaipeiCityVaccine[[2]],max.level = 1) #max.level=1表示只顯示一層
+str(newTaipeiCityVaccine[[2]],max.level = 1) #max.level=1表示只顯示一層 
 str(newTaipeiCityVaccine$result,max.level = 1)
 str(newTaipeiCityVaccine[["result"]])
 #以上結果皆相同
 ```
+```{r}
+tpeTime <- ymd_hms("2020-03-18 13:52:40",
+        tz="Asia/Taipei")
+```
+```{r}
+library(lubridate)
+tpeTime <- ymd_hms("2020-03-18 13:52:40",
+        tz="Asia/Taipei")
+```
+
+
+```{r}
+vectorExample
+vectorExample[c(1,3)]
+vectorExample[c(3,2,1)] # 產生重新排列效果
+```
+##用位置選[c(...)]
+```{r}
+str(listExample, max.level=1)
+
+str(listExample[c(1,2)],max.level=1)
+str(listExample[c(2,1)],max.level=1)
+```
+
+
+```{r}
+str(tainanSportsMap,max.level=1)
+str(tainanSportsMap[c(1,1076,10)],max.level=1)
+```
+##用名字選[c("name1","name2",...)]
+```{r}
+str(listExample[c("學期")])
+
+listExample[c("學期")] #不好
+listExample[["學期"]] #較好
+listExample[c("學期","student")]
+```
+
+```{r練習}
+taipeiNightMarkets<-fromJSON("https://www.dropbox.com/s/qnm9bnz7vccrvcz/taipeiNightMarkets.json?dl=1", simplifyDataFrame = F)
+str(taipeiNightMarkets)
+```
+
+
+
+
+
+
 
 ##上到26:33
